@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;
 
 // Laravel8から書き方が変更された
 // apiに対応したrestfulにしておく
+
+// apiResourceはget,post,put,deletに対応したルーティングを自動で生成する
 Route::apiResource('/books',BookController::class);
 
 Route::apiResource('/users',UserController::class);
