@@ -16,6 +16,7 @@ export default {
         data:''
       }
     },
+    // mounted:このBookListコンポーネントが作られたあとに１度動作する
     async mounted() {
         const url = "/api/books";
         const response = await axios.get(url);

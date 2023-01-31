@@ -1,21 +1,16 @@
 <template>
-    <h1>Hello World</h1>
-    <BookAdd />
-    <BookList />
-    <UserList />
+    <!-- class="container" bootstrap 幅をレスポンシブに調整してくれる -->
+    <div class="container">
+        <h1>Hello World</h1>
+        <router-link to="/">書籍一覧</router-link>
+        <router-link to="/add">本の追加</router-link>
+        <router-link to="/user">ユーザ一覧</router-link>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
-import BookList from './components/BookList.vue'
-import UserList from './components/UserList.vue'
-import BookAdd from './components/BookAdd.vue'
-
 export default {
     name: 'App',
-    components:{
-        BookList,
-        UserList,
-        BookAdd
-    },
 }
 </script>
