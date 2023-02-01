@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <label for="title" class="form-label">タイトルpppp</label>
+        <label for="title" class="form-label">タイトル</label>
         <!-- P.65 v-model(双方向データバインディング) -->
         <input type="text" name="title" id="" class="form-control" v-model="book.title">
         <br>
