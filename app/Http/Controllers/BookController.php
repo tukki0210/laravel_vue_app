@@ -43,10 +43,10 @@ class BookController extends Controller
     public function search(Request $request)
     {
         // キーワードを受け取れているか確認
-        // dd($request);
+        // dd($request->keyword);
         // 教科書P246参照
         $item = Book::where('title',$request->keyword)->first();
-
+        
         return $item;
     }
 }

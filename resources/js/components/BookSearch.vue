@@ -26,9 +26,6 @@ export default {
     methods: {
         async search() {
             console.log(this.keyword);
-            // 完全一致の場合のみ
-            // const result = this.data.filter(book => book.title === this.keyword);
-            // 指定した文字を含む場合を作りたい
             const url = "/api/books/search";
             // axios.post('送信先のurl','データ')
             const response =
