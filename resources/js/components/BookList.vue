@@ -5,8 +5,8 @@
     <input type="text" name="search" id="" class="form-control" v-model="keyword">
     <button class="btn btn-primary" v-on:click="search">検索</button>
   </div>
-  <ul v-for="datum in data" class="list-group">
-    <li class="list-group-item">{{ datum.title }}</li>
+  <ul v-for="Book in Books" class="list-group">
+    <li class="list-group-item">{{ Book.title }}</li>
   </ul>
 
 </template>
@@ -18,7 +18,9 @@ export default {
   name: 'BookList',
   data() {
     return {
-      data: '',
+      // data: '',
+      APIdata:'',
+      Books:'',
       keyword: ''
     }
   },
@@ -28,7 +30,12 @@ export default {
     const response = await axios.get(url);
     console.log(response.data);
     // このresponse.dataは３つのオブジェクトが入った配列
-    this.data = response.data;
+
+    // APIから取得した全データを保存
+    this.APIdata = response.data;
+
+    // 検索機能で上書きするためにコピーを作る
+    this.Books =  response.data;
   },
   methods: {
     search() {
@@ -36,10 +43,10 @@ export default {
       // 完全一致の場合のみ
       // const result = this.data.filter(book => book.title === this.keyword);
       // 指定した文字を含む場合を作りたい
-      const result = this.data.filter(book => book.title.includes(this.keyword));
+      const result = this.APIdata.filter(book => book.title.includes(this.keyword));
       console.log(result);
-      // this.dataを上書き
-      this.data = result;
+      // this.Booksを上書き
+      this.Books = result;
     }
   }
 }
