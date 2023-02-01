@@ -40,4 +40,13 @@ class BookController extends Controller
         // 受け取ったデータをインスタンスに挿入し、DBに保存
         $book->fill($form)->save();
     }
+    public function search(Request $request)
+    {
+        // キーワードを受け取れているか確認
+        // dd($request);
+        // 教科書P246参照
+        $item = Book::where('title',$request->keyword)->first();
+
+        return $item;
+    }
 }

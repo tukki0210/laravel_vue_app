@@ -13,4 +13,9 @@ use App\Http\Controllers\UserController;
 // apiResourceはget,post,put,deletに対応したルーティングを自動で生成する
 Route::apiResource('/books',BookController::class);
 
+// 教科書P45などのLaravel6の書き方から変化している
+// Laravel6 Route::get('/book',BookController@index);
+
+Route::post('/books/search', [BookController::class, 'search']);
+
 Route::apiResource('/users',UserController::class);

@@ -34,7 +34,6 @@ export default {
     methods: {
         // clickイベントの発火時に動作するメソッド
         async send() {
-            console.log('hi');
             const url = "/api/books";
             // axios.post('送信先のurl','データ')
             const response = await axios.post(url, this.book);

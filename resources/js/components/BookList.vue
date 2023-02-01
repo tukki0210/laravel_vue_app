@@ -8,7 +8,6 @@
   <ul v-for="Book in Books" class="list-group">
     <li class="list-group-item">{{ Book.title }}</li>
   </ul>
-
 </template>
 
 <script>
