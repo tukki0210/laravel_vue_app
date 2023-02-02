@@ -17,7 +17,6 @@ export default {
     name: 'BookSearch',
     data() {
         return {
-            // data: '',
             APIdata: '',
             Books: '',
             keyword: ''
@@ -34,7 +33,11 @@ export default {
                     { keyword: this.keyword }
                 );
 
-            console.log(response);
+            console.log(response.data);
+            // 検索結果を保存
+            const result = response.data;
+            this.Books = result;
+
         }
     }
 }

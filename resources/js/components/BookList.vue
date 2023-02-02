@@ -39,8 +39,6 @@ export default {
   methods: {
     search() {
       console.log(this.keyword);
-      // 完全一致の場合のみ
-      // const result = this.data.filter(book => book.title === this.keyword);
       // 指定した文字を含む場合を作りたい
       const result = this.APIdata.filter(book => book.title.includes(this.keyword));
       console.log(result);
