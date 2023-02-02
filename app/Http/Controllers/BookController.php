@@ -42,11 +42,11 @@ class BookController extends Controller
         // キーワードを受け取れているか確認
         // dd($request->keyword);
         // 教科書P246参照
-        $item = Book::where('title','like','%'.$request->keyword.'%')->get();
+        $books = Book::where('title','like','%'.$request->keyword.'%')->get();
 
         // dd($item);
 
         // 検索結果をreturnする
-        return $item;
+        return $books;
     }
 }

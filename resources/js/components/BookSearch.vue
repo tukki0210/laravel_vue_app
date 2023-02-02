@@ -1,7 +1,7 @@
 <template>
     <h2>検索</h2>
     <div class="my-3">
-        <label for="search" class="form-label">本の検索</label>
+        <label for="search" class="form-label">書籍の検索</label>
         <input type="text" name="search" id="" class="form-control" v-model="keyword">
         <button class="btn btn-primary" v-on:click="search">検索</button>
     </div>
@@ -26,7 +26,7 @@ export default {
         async search() {
             console.log(this.keyword);
             const url = "/api/books/search";
-            // axios.post('送信先のurl','データ')
+            // axios.post('送信先のurl','データ（オブジェクトで渡す）')
             const response =
                 await axios.post(
                     url,
