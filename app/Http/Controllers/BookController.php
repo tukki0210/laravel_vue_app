@@ -47,4 +47,11 @@ class BookController extends Controller
         // 検索結果をreturnする
         return $books;
     }
+    // 教科書P299
+    public function show($id)
+    {
+        $book = Book::find($id);
+
+        return $book;
+    }
 }
