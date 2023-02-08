@@ -3,6 +3,8 @@ import {createRouter, createWebHistory} from 'vue-router'
 import BookList from '../components/BookList.vue'
 import BookAdd from '../components/BookAdd.vue'
 import BookSearch from '../components/BookSearch.vue'
+import BookDetail from '../components/BookDetail.vue'
+
 import UserList from '../components/UserList.vue'
 
 export const router = createRouter({
@@ -13,6 +15,11 @@ export const router = createRouter({
             path: '/',
             name: 'index',
             component: BookList,
+        },
+        {
+            path: '/book/:id',
+            name: 'book',
+            component: BookDetail
         },
         {
             path: '/add',

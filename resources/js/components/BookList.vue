@@ -6,7 +6,10 @@
     <button class="btn btn-primary" v-on:click="search">検索</button>
   </div>
   <ul v-for="Book in Books" class="list-group">
-    <li class="list-group-item">{{ Book.title }}</li>
+    <!-- p359の下 ルートパラメータ-->
+    <router-link v-bind:to="{ name: 'book', params: { id: Book.book_id } }">
+      <li class="list-group-item">{{ Book.title }}</li>
+    </router-link>
   </ul>
 </template>
 
@@ -18,8 +21,8 @@ export default {
   data() {
     return {
       // data: '',
-      APIdata:'',
-      Books:'',
+      APIdata: '',
+      Books: '',
       keyword: ''
     }
   },
@@ -34,7 +37,7 @@ export default {
     this.APIdata = response.data;
 
     // 検索機能で上書きするためにコピーを作る
-    this.Books =  response.data;
+    this.Books = response.data;
   },
   methods: {
     search() {

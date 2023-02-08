@@ -44,8 +44,6 @@ class BookController extends Controller
         // 教科書P246参照
         $books = Book::where('title','like','%'.$request->keyword.'%')->get();
 
-        // dd($item);
-
         // 検索結果をreturnする
         return $books;
     }
