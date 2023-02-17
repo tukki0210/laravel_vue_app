@@ -19,8 +19,6 @@ class LoanController extends Controller
     // 新しい貸出状況を追加
     public function store(Request $request)
     {
-        // 参考：教科書P２５９あたり
-
         // モデルの空のインスタンスを生成
         $loan = new Loan();
         // 受け取ったリクエストのデータを全て取得
@@ -28,5 +26,8 @@ class LoanController extends Controller
 
         // 受け取ったデータをインスタンスに挿入し、DBに保存
         $loan->fill($form)->save();
+
+        // 特にreturnはしない場合
+        return '';
     }
 }
