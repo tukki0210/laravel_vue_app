@@ -27,6 +27,10 @@ class LoanController extends Controller
         // 受け取ったデータをインスタンスに挿入し、DBに保存
         $loan->fill($form)->save();
 
+        // bookのavailableをfalseに変更する
+        // P262あたりを参照
+        // 本のidから指定の本を見つけて、availableを更新する
+
         // 特にreturnはしない場合
         return '';
     }

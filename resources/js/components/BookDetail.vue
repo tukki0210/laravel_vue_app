@@ -18,14 +18,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">この本を借りる</h5>
-                    <button type="button" class="btn-close"  aria-label="Close"></button>
+                    <button type="button" class="btn-close" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     （２週間後の日付）まで借りる or （レンタル中のため）借りることが出来ないことを表示
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="rentBook">決定</button>
+                    <input type="date" v-model="returnDay">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            v-on:click="rentBook">決定</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,11 +36,15 @@
 
 <script>
 import axios from 'axios';
+import { addWeeks } from 'date-fns';
+
+
 export default {
     name: 'BookDetail',
     data() {
         return {
-            bookData: {}
+            bookData: {},
+            returnDay: ''
         }
     },
     async mounted() {
@@ -61,8 +67,11 @@ export default {
 
             // 返却日は２週間後とする
             // P279を参照
-            const twoWeekLater = new Date(now.getFullYear(),now.getMonth(),now.getDate()+14);
-            const return_date = twoWeekLater.toLocaleDateString();
+            // const twoWeekLater = new Date(now.getFullYear(),now.getMonth(),now.getDate()+14);
+            // const twoWeekLater = addWeeks(now,2);
+
+            // const return_date = twoWeekLater.toLocaleDateString();
+            const return_date = this.returnDay;
 
             // この本を借りることをAPIに送る
             const response =
@@ -70,6 +79,7 @@ export default {
                     url,
                     {
                         book_id: this.$route.params.id,
+                        // user_idはログイン認証が完成したら設定
                         user_id: 2,
                         loan_date: loan_date,
                         return_date: return_date

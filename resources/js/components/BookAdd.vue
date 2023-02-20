@@ -5,7 +5,7 @@
         <input type="text" name="title" id="" class="form-control" v-model="book.title">
         <br>
         <label for="author" class="form-label">著者</label>
-        <input type="text" name="author" id="" class="form-control" v-model="book.author">
+        <input type="text" name="author" id="author" class="form-control" v-model="book.author">
         <br>
         <!-- P.53 v-on イベント -->
         <button class="btn btn-info" v-on:click="send">送信</button>
