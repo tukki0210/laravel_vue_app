@@ -14,10 +14,12 @@
             <button type="button" class="btn btn-info" v-on:click="getBooksDataByRakutenAPI">本のデータを取得</button>
         </div>
 
-        <ul v-for="(APIDatum, index) in APIData">
-            <li class="border border-primary" v-bind:key="index" v-on:click="addBook(APIDatum)">{{ APIDatum.Item.title }}
-            </li>
-        </ul>
+        <div v-for="(APIDatum, index) in APIData">
+            <div class="border border-primary d-flex" v-bind:key="index" v-on:click="_$event => addBook(APIDatum)">
+                <img v-bind:src="APIDatum.Item.mediumImageUrl" v-bind:alt="APIDatum.Item.title">
+                <p>{{ APIDatum.Item.title }}</p>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -69,7 +71,7 @@ export default {
                 'gunre': 'Java',
                 'largeImageUrl': APIDatum.Item.largeImageUrl,
                 'mediumImageUrl': APIDatum.Item.mediumImageUrl,
-                'available':true
+                'available': true
             }
             const response = await axios.post(url, bookData);
             console.log(response);

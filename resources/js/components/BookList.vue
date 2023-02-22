@@ -5,12 +5,15 @@
     <input type="text" name="search" id="" class="form-control" v-model="keyword">
     <button class="btn btn-primary" v-on:click="search">検索</button>
   </div>
-  <ul v-for="Book in Books" class="list-group">
+  <div v-for="Book in Books" class="list-group">
     <!-- p359の下 ルートパラメータ-->
     <router-link v-bind:to="{ name: 'book', params: { id: Book.book_id } }">
-      <li class="list-group-item">{{ Book.title }}</li>
+      <div class="d-flex">
+        <img v-bind:src="Book.mediumImageUrl" v-bind:alt="Book.title">
+        <div class="list-group-item">{{ Book.title }}</div>
+      </div>
     </router-link>
-  </ul>
+  </div>
 </template>
 
 <script>
