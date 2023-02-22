@@ -51,9 +51,8 @@ export default {
         async getBooksDataByRakutenAPI() {
             const url = "/api/books/getRakutenAPI";
             const response = await axios.get(url);
-            console.log(response);
-
             this.APIData = response.data.Items
+            console.log(this.APIData[0]);
         }
     }
 }

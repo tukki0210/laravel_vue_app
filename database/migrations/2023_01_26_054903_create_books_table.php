@@ -17,10 +17,14 @@ return new class extends Migration
             $table->increments('book_id');
             $table->string('title');
             $table->string('author');
-            $table->string('publisher');
-            $table->string('ISBN');
-            $table->string('summary');
-            $table->string('gunre');
+            $table->string('publisherName');
+            $table->string('isbn');
+            $table->string('itemCaption');
+            // gunreは追加時に自分で設定する
+            // 楽天APIには無いのでnullを許可する
+            $table->string('gunre')->nullable();
+            $table->string('largeImageUrl');
+            $table->string('mediumImageUrl');
             $table->boolean('available');
             $table->timestamps();
         });
