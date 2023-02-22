@@ -23,7 +23,13 @@ export default defineConfig({
     server: {
         hmr: {
             host: 'localhost'
-        }
+        },
+        proxy: {
+            'https://app.rakuten.co.jp': {
+                target: 'http://localhost:8000',
+                changeOrigin: true,
+            },
+        }, 
     },
     resolve: {
         alias: {
