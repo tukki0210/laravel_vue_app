@@ -8,7 +8,11 @@
         <input type="text" name="author" id="author" class="form-control" v-model="book.author">
         <br>
         <!-- P.53 v-on イベント -->
-        <button class="btn btn-info" v-on:click="send">送信</button>
+        <button type="button" class="btn btn-info" v-on:click="send">送信</button>
+
+        <div class="mt-5">
+            <button type="button" class="btn btn-info" v-on:click="getBooksDataByRakutenAPI">本のデータを取得</button>
+        </div>
     </div>
 </template>
 <script>
@@ -38,6 +42,12 @@ export default {
             // axios.post('送信先のurl','データ')
             const response = await axios.post(url, this.book);
             console.log(response);
+        },
+        async getBooksDataByRakutenAPI() {
+            const url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&title=%E5%A4%AA%E9%99%BD&booksGenreId=001004008&applicationId=1024837784734370415";
+            const response = await fetch(url);
+            console.log(response);
+
         }
     }
 }
