@@ -14,8 +14,9 @@
             <button type="button" class="btn btn-info" v-on:click="getBooksDataByRakutenAPI">本のデータを取得</button>
         </div>
 
-        <ul v-for="APIDatum in APIData">
-            <li>{{ APIDatum.Item.title }}</li>
+        <ul v-for="(APIDatum, index) in APIData">
+            <li class="border border-primary" v-bind:key="index" v-on:click="addBook(APIDatum)">{{ APIDatum.Item.title }}
+            </li>
         </ul>
     </div>
 </template>
@@ -37,7 +38,7 @@ export default {
                 gunre: 'test',
                 available: true
             },
-            APIData:[],
+            APIData: [],
         }
     },
     methods: {
@@ -53,6 +54,25 @@ export default {
             const response = await axios.get(url);
             this.APIData = response.data.Items
             console.log(this.APIData[0]);
+        },
+        async addBook(APIDatum) {
+            const url = "/api/books";
+            // axios.post('送信先のurl','データ')
+            console.log(APIDatum);
+            // 選んだ本のデータ
+            const bookData = {
+                'title': APIDatum.Item.title,
+                'author': APIDatum.Item.author,
+                'publisherName': APIDatum.Item.publisherName,
+                'isbn': APIDatum.Item.isbn,
+                'itemCaption': APIDatum.Item.itemCaption,
+                'gunre': 'Java',
+                'largeImageUrl': APIDatum.Item.largeImageUrl,
+                'mediumImageUrl': APIDatum.Item.mediumImageUrl,
+                'available':true
+            }
+            const response = await axios.post(url, bookData);
+            console.log(response);
         }
     }
 }
