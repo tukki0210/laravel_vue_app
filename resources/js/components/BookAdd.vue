@@ -44,8 +44,8 @@ export default {
             console.log(response);
         },
         async getBooksDataByRakutenAPI() {
-            const url = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&title=%E5%A4%AA%E9%99%BD&booksGenreId=001004008&applicationId=1024837784734370415";
-            const response = await fetch(url);
+            const url = "/api/books/getRakutenAPI";
+            const response = await axios.get(url);
             console.log(response);
 
         }

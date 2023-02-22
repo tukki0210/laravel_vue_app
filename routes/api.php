@@ -8,6 +8,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoanController;
 
+Route::get('/books/getRakutenAPI', [BookController::class, 'getRakutenAPI']);
+
 // Laravel8から書き方が変更された
 // apiに対応したrestfulにしておく
 

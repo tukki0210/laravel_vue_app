@@ -67,6 +67,9 @@ class BookController extends Controller
         $res = $cli->request('get','/services/api/BooksBook/Search/20170404?format=json&title=Java&applicationId=1024837784734370415');
 
         // jsonに変換してreturnする
-        return json_decode($res->getBody());
+        // PHPのときはjson_decode()で変換する
+
+        // Laravelの場合は自動でjsonに変換してくれるので不要
+        return $res->getBody();
     }
 }
