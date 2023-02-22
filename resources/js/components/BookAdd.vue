@@ -13,6 +13,10 @@
         <div class="mt-5">
             <button type="button" class="btn btn-info" v-on:click="getBooksDataByRakutenAPI">本のデータを取得</button>
         </div>
+
+        <ul v-for="APIDatum in APIData">
+            <li>{{ APIDatum.Item.title }}</li>
+        </ul>
     </div>
 </template>
 <script>
@@ -32,7 +36,8 @@ export default {
                 summary: 'test',
                 gunre: 'test',
                 available: true
-            }
+            },
+            APIData:[],
         }
     },
     methods: {
@@ -48,6 +53,7 @@ export default {
             const response = await axios.get(url);
             console.log(response);
 
+            this.APIData = response.data.Items
         }
     }
 }
