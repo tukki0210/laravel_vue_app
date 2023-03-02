@@ -8,9 +8,21 @@
   <div v-for="Book in Books" class="list-group">
     <!-- p359の下 ルートパラメータ-->
     <router-link v-bind:to="{ name: 'book', params: { id: Book.book_id } }">
-      <div class="d-flex">
+      <!-- <div class="d-flex">
         <img v-bind:src="Book.mediumImageUrl" v-bind:alt="Book.title">
         <div class="list-group-item">{{ Book.title }}</div>
+      </div> -->
+      <div class="card mb-3" style="max-width: 400px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img v-bind:src="Book.mediumImageUrl" v-bind:alt="Book.title">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ Book.title }}</h5>
+            </div>
+          </div>
+        </div>
       </div>
     </router-link>
   </div>

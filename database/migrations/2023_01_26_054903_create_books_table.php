@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('author');
             $table->string('publisherName');
             $table->string('isbn');
-            $table->string('itemCaption');
+            // 256文字では足りないのでtext型にする
+            $table->text('itemCaption')->nullable();
             // gunreは追加時に自分で設定する
             // 楽天APIには無いのでnullを許可する
             $table->string('gunre')->nullable();
-            $table->string('largeImageUrl');
-            $table->string('mediumImageUrl');
+            $table->string('largeImageUrl')->nullable();
+            $table->string('mediumImageUrl')->nullable();
             $table->boolean('available');
             $table->timestamps();
         });

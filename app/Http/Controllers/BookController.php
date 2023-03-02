@@ -59,12 +59,24 @@ class BookController extends Controller
 
     public function getRakutenAPI(Request $request)
     {
+        // フロントエンドから検索したい本のタイトルを受け取る
+        $title = $request->title;
+
         $cli = new GuzzleHttp\Client([
             'base_uri' => 'https://app.rakuten.co.jp'
         ]);
 
         // リクエストを送信
-        $res = $cli->request('get','/services/api/BooksBook/Search/20170404?format=json&title=Java&applicationId=1024837784734370415');
+        $res = $cli->request(
+            'get',
+            '/services/api/BooksBook/Search/20170404',
+            ['query' => [
+                'format' => 'json',
+                'applicationId' => env('RAKUTEN_APP_ID'),
+                'title'=>$title
+                ]
+            ]
+        );
 
         // jsonに変換してreturnする
         // PHPのときはjson_decode()で変換する

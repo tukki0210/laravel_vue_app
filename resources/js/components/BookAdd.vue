@@ -11,13 +11,21 @@
         <button type="button" class="btn btn-info" v-on:click="send">送信</button>
 
         <div class="mt-5">
+
+            <label for="rakutenBooksAPI">楽天ブックスAPIから探す</label>
+            <input type="text" id="rakutenBooksAPI" class="form-control" v-model="title">
+
             <button type="button" class="btn btn-info" v-on:click="getBooksDataByRakutenAPI">本のデータを取得</button>
         </div>
 
-        <div v-for="(APIDatum, index) in APIData">
-            <div class="border border-primary d-flex" v-bind:key="index" v-on:click="_$event => addBook(APIDatum)">
+        <div v-for="APIDatum in APIData">
+            <div class="border border-primary d-flex">
                 <img v-bind:src="APIDatum.Item.mediumImageUrl" v-bind:alt="APIDatum.Item.title">
-                <p>{{ APIDatum.Item.title }}</p>
+                <div>
+                    <p>{{ APIDatum.Item.title }}</p>
+                    <!-- 拡張機能のポップアップは無視する（clickなどのイベントオブジェクトを表示しろという意味） -->
+                    <button class="btn btn-primary" v-on:click="addBook(APIDatum)">登録</button>
+                </div>
             </div>
         </div>
     </div>
@@ -41,6 +49,7 @@ export default {
                 available: true
             },
             APIData: [],
+            title: 'Java'
         }
     },
     methods: {
@@ -49,30 +58,39 @@ export default {
             const url = "/api/books";
             // axios.post('送信先のurl','データ')
             const response = await axios.post(url, this.book);
-            console.log(response);
         },
         async getBooksDataByRakutenAPI() {
             const url = "/api/books/getRakutenAPI";
-            const response = await axios.get(url);
+            const response = await axios.get(url, {
+                // paramsにクエリ（URLの？以降）を書ける
+                params: {
+                    title: this.title
+                }
+            });
+
+            // APIからの出力結果
             this.APIData = response.data.Items
-            console.log(this.APIData[0]);
         },
         async addBook(APIDatum) {
             const url = "/api/books";
             // axios.post('送信先のurl','データ')
             console.log(APIDatum);
-            // 選んだ本のデータ
+            // 選んだ本のデータを登録用に加工する
+            const selectBook = APIDatum.Item
+            
             const bookData = {
-                'title': APIDatum.Item.title,
-                'author': APIDatum.Item.author,
-                'publisherName': APIDatum.Item.publisherName,
-                'isbn': APIDatum.Item.isbn,
-                'itemCaption': APIDatum.Item.itemCaption,
-                'gunre': 'Java',
-                'largeImageUrl': APIDatum.Item.largeImageUrl,
-                'mediumImageUrl': APIDatum.Item.mediumImageUrl,
-                'available': true
+                title: selectBook.title,
+                author: selectBook.author,
+                publisherName: selectBook.publisherName,
+                isbn: selectBook.isbn,
+                itemCaption: selectBook.itemCaption,
+                // ジャンルはJavaで仮に入れる
+                gunre: 'Java',
+                largeImageUrl: selectBook.largeImageUrl,
+                mediumImageUrl:selectBook.mediumImageUrl,
+                available: true
             }
+            // データベースに保存のAPIを叩く
             const response = await axios.post(url, bookData);
             console.log(response);
         }
