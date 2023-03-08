@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('hello/{id?}/{pass?}',function(){
 //     return view('welcome'))
 
+// laravel側ではなくvue側でルーティングする
 Route::get('/{any}', function () {
     return view('welcome');
-})->where('any','.*');
+})
+->where('any','.*');
