@@ -12,12 +12,12 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         // emailとpasswordがあるか確認
-        $request->validate([
+        $credential = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if(Auth::attempt($request->only('email','password'))){
+        if(Auth::attempt($credential)){
             // ログインが成功した場合
 
             // sessionIDを(再)生成する
