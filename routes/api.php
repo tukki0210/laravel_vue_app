@@ -8,6 +8,11 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoanController;
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+
+
+
 Route::get('/books/getRakutenAPI', [BookController::class, 'getRakutenAPI']);
 
 // Laravel8から書き方が変更された
@@ -24,3 +29,6 @@ Route::post('/books/search', [BookController::class, 'search']);
 Route::apiResource('/users',UserController::class);
 
 Route::apiResource('/loans',LoanController::class);
+
+Route::post('/login',[LoginController::class,'login']);
+Route::post('/logout',[LogoutController::class,'logout']);
