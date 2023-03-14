@@ -7,6 +7,8 @@ import BookDetail from '../components/BookDetail.vue'
 
 import UserList from '../components/UserList.vue'
 
+import Login from '../components/Login.vue'
+
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -36,6 +38,11 @@ export const router = createRouter({
             path: '/user',
             name: 'user', 
             component: UserList,
+        },
+        {
+            path: '/login',
+            name: 'login', 
+            component: Login,
         },
     ]
 })
