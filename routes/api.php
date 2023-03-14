@@ -12,23 +12,22 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 
 
+// 未ログインでも有効
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LogoutController::class, 'logout']);
 
-Route::get('/books/getRakutenAPI', [BookController::class, 'getRakutenAPI']);
+// ログイン後のみ有効
 
-// Laravel8から書き方が変更された
-// apiに対応したrestfulにしておく
+// 単品のみの場合
+Route::middleware('auth:sanctum')->apiResource('/users', UserController::class);
 
-// apiResourceはget,post,put,deletに対応したルーティングを自動で生成する
-Route::apiResource('/books',BookController::class);
+// 複数まとめる場合
+Route::group(["middleware" => ["auth:sanctum"]], function () {
 
-// 教科書P45などのLaravel6の書き方から変化している
-// Laravel6 Route::get('/book',BookController@index);
+    Route::get('/books/getRakutenAPI', [BookController::class, 'getRakutenAPI']);
+    Route::post('/books/search', [BookController::class, 'search']);
+    Route::apiResource('/books', BookController::class);
+});
 
-Route::post('/books/search', [BookController::class, 'search']);
-
-Route::apiResource('/users',UserController::class);
-
-Route::apiResource('/loans',LoanController::class);
-
-Route::post('/login',[LoginController::class,'login']);
-Route::post('/logout',[LogoutController::class,'logout']);
+// 単品の場合
+Route::middleware('auth:sanctum')->apiResource('/loans', LoanController::class);
