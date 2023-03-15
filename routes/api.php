@@ -14,7 +14,7 @@ use App\Http\Controllers\Auth\LogoutController;
 
 // 未ログインでも有効
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LogoutController::class, 'logout']);
+Route::get('/logout', [LogoutController::class, 'logout']);
 
 // ログイン後のみ有効
 

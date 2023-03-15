@@ -8,6 +8,7 @@ import BookDetail from '../components/BookDetail.vue'
 import UserList from '../components/UserList.vue'
 
 import Login from '../components/Login.vue'
+import Logout from '../components/Logout.vue'
 
 export const router = createRouter({
     history: createWebHistory(),
@@ -43,7 +44,20 @@ export const router = createRouter({
             path: '/login',
             name: 'login', 
             component: Login,
-        },
+        },        
+        {
+            path: '/logout',
+            name: 'logout',
+            component: Logout,
+            // P377
+            beforeEnter: (to, from, next) => {
+                if (document.cookie.includes('XSRF-TOKEN')) {
+                    next();
+                } else {
+                    next('/login');
+                }
+            }
+        }
     ]
 })
 

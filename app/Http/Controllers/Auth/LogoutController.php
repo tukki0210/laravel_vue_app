@@ -11,8 +11,8 @@ class LogoutController extends Controller
 {
     public function logout(Request $request)
     {
-        // web認証ガードからログアウトする
-        Auth::guard('web')->logout();
+        // ログアウトする
+        Auth::logout();
 
         $request->session()->invalidate();
 

@@ -19,13 +19,13 @@ import axios from "axios";
 
 export default {
     name: 'Login',
-    data(){
-      return {
-        email:'',
-        password:''
-      }
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
     },
-    methods:{
+    methods: {
         async login() {
             // getでアクセスするだけでCSRFクッキーがもらえる
             const csrfCookie = await axios.get('/sanctum/csrf-cookie');
@@ -33,15 +33,20 @@ export default {
             console.log(csrfCookie);
 
             // 本命のログイン
-            // 本当はtry-catchでエラーの場合の処理もした方がよいかも
-            const response = await axios.post('/api/login',{
-                email:this.email,
-                password:this.password
-            })
 
-            console.log(response);
+            try {
+                const response = await axios.post('/api/login', {
+                    email: this.email,
+                    password: this.password
+                })
+                // ログインに成功したら、トップページに遷移する
+                this.$router.push('/');
+
+            } catch (error) {
+                console.log(error)
+            }
+
         }
     }
-    
 }
 </script>
